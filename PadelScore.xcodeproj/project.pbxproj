@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		6AE7AF0829C31142007C9986 /* PadelScore Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6AE7AF0729C31142007C9986 /* PadelScore Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6AE7AF0D29C31142007C9986 /* PadelScoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7AF0C29C31142007C9986 /* PadelScoreApp.swift */; };
-		6AE7AF0F29C31142007C9986 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7AF0E29C31142007C9986 /* ContentView.swift */; };
+		6AE7AF0F29C31142007C9986 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7AF0E29C31142007C9986 /* ScoreView.swift */; };
 		6AE7AF1129C31145007C9986 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AE7AF1029C31145007C9986 /* Assets.xcassets */; };
 		6AE7AF1429C31145007C9986 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AE7AF1329C31145007C9986 /* Preview Assets.xcassets */; };
 		6AE7AF1E29C31146007C9986 /* PadelScore_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7AF1D29C31146007C9986 /* PadelScore_Watch_AppTests.swift */; };
 		6AE7AF2829C31146007C9986 /* PadelScore_Watch_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7AF2729C31146007C9986 /* PadelScore_Watch_AppUITests.swift */; };
 		6AE7AF2A29C31146007C9986 /* PadelScore_Watch_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7AF2929C31146007C9986 /* PadelScore_Watch_AppUITestsLaunchTests.swift */; };
+		6AE7AF3B29C32261007C9986 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7AF3A29C32261007C9986 /* Model.swift */; };
+		6AE7AF3D29C336FF007C9986 /* TeamAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7AF3C29C336FF007C9986 /* TeamAView.swift */; };
+		6AE7AF3F29C33714007C9986 /* TeamBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE7AF3E29C33714007C9986 /* TeamBView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +62,7 @@
 		6AE7AF0129C31142007C9986 /* PadelScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PadelScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE7AF0729C31142007C9986 /* PadelScore Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PadelScore Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE7AF0C29C31142007C9986 /* PadelScoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadelScoreApp.swift; sourceTree = "<group>"; };
-		6AE7AF0E29C31142007C9986 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6AE7AF0E29C31142007C9986 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		6AE7AF1029C31145007C9986 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AE7AF1329C31145007C9986 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6AE7AF1929C31146007C9986 /* PadelScore Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PadelScore Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +70,9 @@
 		6AE7AF2329C31146007C9986 /* PadelScore Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PadelScore Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE7AF2729C31146007C9986 /* PadelScore_Watch_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadelScore_Watch_AppUITests.swift; sourceTree = "<group>"; };
 		6AE7AF2929C31146007C9986 /* PadelScore_Watch_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadelScore_Watch_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6AE7AF3A29C32261007C9986 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		6AE7AF3C29C336FF007C9986 /* TeamAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamAView.swift; sourceTree = "<group>"; };
+		6AE7AF3E29C33714007C9986 /* TeamBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamBView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +125,10 @@
 			isa = PBXGroup;
 			children = (
 				6AE7AF0C29C31142007C9986 /* PadelScoreApp.swift */,
-				6AE7AF0E29C31142007C9986 /* ContentView.swift */,
+				6AE7AF0E29C31142007C9986 /* ScoreView.swift */,
+				6AE7AF3C29C336FF007C9986 /* TeamAView.swift */,
+				6AE7AF3E29C33714007C9986 /* TeamBView.swift */,
+				6AE7AF3A29C32261007C9986 /* Model.swift */,
 				6AE7AF1029C31145007C9986 /* Assets.xcassets */,
 				6AE7AF1229C31145007C9986 /* Preview Content */,
 			);
@@ -309,7 +318,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AE7AF0F29C31142007C9986 /* ContentView.swift in Sources */,
+				6AE7AF3B29C32261007C9986 /* Model.swift in Sources */,
+				6AE7AF3D29C336FF007C9986 /* TeamAView.swift in Sources */,
+				6AE7AF0F29C31142007C9986 /* ScoreView.swift in Sources */,
+				6AE7AF3F29C33714007C9986 /* TeamBView.swift in Sources */,
 				6AE7AF0D29C31142007C9986 /* PadelScoreApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

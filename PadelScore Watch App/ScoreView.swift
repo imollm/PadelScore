@@ -7,20 +7,21 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ScoreView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            TeamAView()
+            Divider()
+              .frame(height: 2)
+              .padding(.horizontal, 10)
+            TeamBView()
         }
-        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ScoreView()
+            .environmentObject(MatchModel())
     }
 }
