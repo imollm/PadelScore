@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ScoreView: View {
+    @EnvironmentObject var matchModel:MatchModel
+    
     var body: some View {
         VStack {
             TeamAView()
