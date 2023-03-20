@@ -9,27 +9,32 @@ import SwiftUI
 
 struct TeamBView: View {
     @EnvironmentObject var matchModel:MatchModel
+    @State var currentPoints: String = "0"
     
     var body: some View {
         VStack {
             HStack {
                 ForEach(matchModel.match.teamB.getSets()) { item in
-                    Text(String(item.getPoints()))
+                    Text(String(item.getGames()))
                         .padding(.horizontal)
                 }
             }
             HStack {
                 Button(action: {
-                    
+                    self.matchModel.match.addPoint(team: TEAM_B)
+                    self.currentPoints = self.matchModel.match.teamB.getCurrentPoints()
                 }, label: {
                     Image(systemName: "plus")
                 })
                 .frame(width: 50.0, height: 100.0)
                 
-                Text("15").font(.title2).padding(.horizontal, 20.0)
+                Text("\(self.currentPoints)")
+                    .font(.title2)
+                    .padding(.horizontal, 20.0)
                 
                 Button(action: {
-                    
+                    self.matchModel.match.substractPoint(team: TEAM_B)
+                    self.currentPoints = self.matchModel.match.teamB.getCurrentPoints()
                 }, label: {
                     Image(systemName: "minus")
                 })
