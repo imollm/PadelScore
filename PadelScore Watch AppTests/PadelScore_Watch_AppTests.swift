@@ -231,10 +231,10 @@ class PadelScore_Watch_AppTests: XCTestCase {
             XCTAssertEqual(teamA.getCurrentTieBreakPoints(), String(i))
         }
         
-        // Sets       1   2   3  | Points
-        // Team A -> [7] [0] [0] | ( 0 )
+        // Sets       1   2   3  | Tie Break Points
+        // Team A -> [7] [0] [0] | ( 6 )
         // Team B -> [6] [0] [0] | ( 0 )
-        match.addTieBreakPoint(team: TEAM_A)
+        match.addTieBreakPoint(team: TEAM_A) // Adding the 7th point for Team A to win the set
         XCTAssertEqual(teamA.getCurrentTieBreakPoints(), "0")
         XCTAssertEqual(teamB.getCurrentTieBreakPoints(), "0")
         XCTAssertFalse(match.isTieBreak)
