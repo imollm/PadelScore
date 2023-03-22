@@ -9,7 +9,10 @@ import SwiftUI
 
 struct TeamBView: View {
     @EnvironmentObject var matchModel:MatchModel
-    @State var currentPoints: String = "0"
+    @Binding var currentPointsTeamA: String
+    @Binding var currentPointsTeamB: String
+    @Binding var currentTieBreakPointsTeamA: String
+    @Binding var currentTieBreakPointsTeamB: String
     
     var body: some View {
         VStack {
@@ -21,20 +24,37 @@ struct TeamBView: View {
             }
             HStack {
                 Button(action: {
-                    self.matchModel.match.addPoint(team: TEAM_B)
-                    self.currentPoints = self.matchModel.match.teamB.getCurrentPoints()
+                    if (self.matchModel.match.isTieBreak) {
+                        self.matchModel.match.addTieBreakPoint(team: TEAM_B)
+                        self.currentTieBreakPointsTeamA = self.matchModel.match.teamA.getCurrentTieBreakPoints()
+                        self.currentTieBreakPointsTeamB =
+                            self.matchModel.match.teamB.getCurrentTieBreakPoints()
+                        
+                    } else {
+                        self.matchModel.match.addPoint(team: TEAM_B)
+                        self.currentPointsTeamA = self.matchModel.match.teamA.getCurrentPoints()
+                        self.currentPointsTeamB =
+                            self.matchModel.match.teamB.getCurrentPoints()
+                    }
                 }, label: {
                     Image(systemName: "plus")
                 })
                 .frame(width: 50.0, height: 100.0)
                 
-                Text("\(self.currentPoints)")
+                Text(self.matchModel.match.isTieBreak ? "\(self.currentTieBreakPointsTeamB)" : "\(self.currentPointsTeamB)")
                     .font(.title2)
                     .padding(.horizontal, 20.0)
                 
                 Button(action: {
-                    self.matchModel.match.substractPoint(team: TEAM_B)
-                    self.currentPoints = self.matchModel.match.teamB.getCurrentPoints()
+                    if (self.matchModel.match.isTieBreak) {
+                        self.matchModel.match.substractTieBreakPoint(team: TEAM_B)
+                        self.currentTieBreakPointsTeamA = self.matchModel.match.teamA.getCurrentTieBreakPoints()
+                    } else {
+                        self.matchModel.match.substractPoint(team: TEAM_B)
+                        self.currentPointsTeamA = self.matchModel.match.teamA.getCurrentPoints()
+                        self.currentPointsTeamB =
+                            self.matchModel.match.teamB.getCurrentPoints()
+                    }
                 }, label: {
                     Image(systemName: "minus")
                 })
@@ -48,7 +68,16 @@ struct TeamBView: View {
 
 struct TeamBView_Previews: PreviewProvider {
     static var previews: some View {
-        TeamBView()
+        let currentPointsTeamA = Binding<String>(get: { "0" }, set: { _ in })
+        let currentPointsTeamB = Binding<String>(get: { "0" }, set: { _ in })
+        let currentTieBreakPointsTeamA = Binding<String>(get: { "0" }, set: { _ in })
+        let currentTieBreakPointsTeamB = Binding<String>(get: { "0" }, set: { _ in })
+        
+        TeamBView(
+            currentPointsTeamA: currentPointsTeamA,
+            currentPointsTeamB: currentPointsTeamB,
+            currentTieBreakPointsTeamA: currentTieBreakPointsTeamA,
+            currentTieBreakPointsTeamB: currentTieBreakPointsTeamB)
             .environmentObject(MatchModel())
     }
 }
