@@ -222,7 +222,7 @@ public class Match: MatchProtocol {
             let teamThatHasScored = self.getTeamByName(team: team)
             let teamThatHasScoredTieBreakPoints = Int(teamThatHasScored.getCurrentTieBreakPoints())!
             let opponentTieBreakPoints = Int(self.getOpponent(team: teamThatHasScored).getCurrentTieBreakPoints())!
-            let is2PointDifference = (teamThatHasScoredTieBreakPoints - opponentTieBreakPoints) == 2
+            let is2PointDifference = ((teamThatHasScoredTieBreakPoints + 1) - opponentTieBreakPoints) == 2
             
             if (
                 (teamThatHasScoredTieBreakPoints == 6 && opponentTieBreakPoints < 6) ||

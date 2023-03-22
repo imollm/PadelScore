@@ -242,5 +242,72 @@ class PadelScore_Watch_AppTests: XCTestCase {
         XCTAssertEqual(teamB.getSet(setIndex: match.getCurrentSet() - 1).getGames(), 6)
         XCTAssertEqual(match.getCurrentSet(), 1)
     }
+    
+    func testTeamWonFirstSetOfTheMatchByTieBreakByDiffOfTwo() {
+        // Sets       1   2   3  | Points
+        // Team A -> [5] [0] [0] | ( 40 )
+        // Team B -> [6] [0] [0] | (  0 )
+        for i in 1...6 {
+            if (i < 6) {
+                teamA.addSetGame(setIndex: 0)
+            }
+            if (i < 4) {
+                teamA.points.addPoint()
+            }
+            teamB.addSetGame(setIndex: 0)
+        }
+        XCTAssertEqual(teamA.getCurrentPoints(), "40")
+        XCTAssertEqual(teamA.getSet(setIndex: 0).getGames(), 5)
+        XCTAssertEqual(teamB.getSet(setIndex: 0).getGames(), 6)
+        
+        match.addPoint(team: TEAM_A)
+        
+        // Sets       1   2   3  | Points
+        // Team A -> [6] [0] [0] | ( 0 )
+        // Team B -> [6] [0] [0] | ( 0 )
+        XCTAssertEqual(match.getCurrentSet(), 0)
+        XCTAssertTrue(match.isTieBreak)
+        XCTAssertEqual(teamA.getCurrentPoints(), "0")
+        XCTAssertEqual(teamB.getCurrentPoints(), "0")
+        XCTAssertEqual(teamA.getSet(setIndex: 0).getGames(), 6)
+        XCTAssertEqual(teamB.getSet(setIndex: 0).getGames(), 6)
+        
+        for i in 1...6 {
+            match.addTieBreakPoint(team: TEAM_A)
+            XCTAssertEqual(teamA.getCurrentTieBreakPoints(), String(i))
+            match.addTieBreakPoint(team: TEAM_B)
+            XCTAssertEqual(teamB.getCurrentTieBreakPoints(), String(i))
+        }
+        
+        // Sets       1   2   3  | Tie Break Points
+        // Team A -> [6] [0] [0] | ( 6 )
+        // Team B -> [6] [0] [0] | ( 6 )
+        
+        match.addTieBreakPoint(team: TEAM_A) // Team A win a tie break point
+        
+        // Still disputing first set
+        // Sets       1   2   3  | Tie Break Points
+        // Team A -> [6] [0] [0] | ( 7 )
+        // Team B -> [6] [0] [0] | ( 6 )
+        
+        XCTAssertEqual(teamA.getCurrentTieBreakPoints(), "7")
+        XCTAssertEqual(teamB.getCurrentTieBreakPoints(), "6")
+        XCTAssertTrue(match.isTieBreak)
+        XCTAssertEqual(match.getCurrentSet(), 0)
+        XCTAssertEqual(teamA.getSet(setIndex: match.getCurrentSet()).getGames(), 6)
+        XCTAssertEqual(teamB.getSet(setIndex: match.getCurrentSet()).getGames(), 6)
+        
+        // Sets       1   2   3  | Tie Break Points
+        // Team A -> [6] [0] [0] | ( 8 )
+        // Team B -> [6] [0] [0] | ( 6 )
+        match.addTieBreakPoint(team: TEAM_A) // Team A win a tie break point and win the set
+        
+        XCTAssertEqual(teamA.getCurrentTieBreakPoints(), "0")
+        XCTAssertEqual(teamB.getCurrentTieBreakPoints(), "0")
+        XCTAssertFalse(match.isTieBreak)
+        XCTAssertEqual(teamA.getSet(setIndex: match.getCurrentSet() - 1).getGames(), 7)
+        XCTAssertEqual(teamB.getSet(setIndex: match.getCurrentSet() - 1).getGames(), 6)
+        XCTAssertEqual(match.getCurrentSet(), 1)
+    }
 }
 
