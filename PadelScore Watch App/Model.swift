@@ -228,11 +228,17 @@ public class Match: MatchProtocol {
                 (teamThatHasScoredTieBreakPoints == 6 && opponentTieBreakPoints < 6) ||
                 (teamThatHasScoredTieBreakPoints >= 6 && opponentTieBreakPoints >= 6 && is2PointDifference)
             ) {
-                teamThatHasScored.getSet(setIndex: self.getCurrentSet()).addSetGame()
-                teamThatHasScored.tieBreakPoints.resetPoints()
-                self.getOpponent(team: teamThatHasScored).tieBreakPoints.resetPoints()
-                self.isTieBreak = false
-                self.currentSet += 1
+                if (self.hasScoredTeamWonTheMatch(teamThatHasScored: teamThatHasScored)) {
+                    self.hasFinished = true
+                    self.winner = teamThatHasScored
+                    teamThatHasScored.addSetGame(setIndex: self.getCurrentSet())
+                } else {
+                    teamThatHasScored.getSet(setIndex: self.getCurrentSet()).addSetGame()
+                    teamThatHasScored.tieBreakPoints.resetPoints()
+                    self.getOpponent(team: teamThatHasScored).tieBreakPoints.resetPoints()
+                    self.isTieBreak = false
+                    self.currentSet += 1
+                }
             } else {
                 teamThatHasScored.addTieBreakPoint()
             }
