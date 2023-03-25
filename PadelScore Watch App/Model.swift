@@ -292,12 +292,18 @@ public class Match: MatchProtocol {
     
     func hasCurrentSetBeenWonByScoredTeam(teamThatHasScored: Team) -> Bool {
         var hasBeenWonASetGame = false
-        let isTheFifthGameOfTheCurrentSet
-            = teamThatHasScored.getSet(setIndex: self.getCurrentSet()).getGames() == 5
-        let isTheCurrentPointsFourty
-            = teamThatHasScored.getCurrentPoints() == FORTY_POINTS
+        let currentGamesOfCurrentSet
+            = teamThatHasScored.getSet(setIndex: self.getCurrentSet()).getGames()
+        let opponentGamesOfCurrentSet
+            = self.getOpponent(team: teamThatHasScored).getSet(setIndex: self.getCurrentSet()).getGames()
+        let teamScoredCurrentPoints
+            = teamThatHasScored.getCurrentPoints()
         
-        if (isTheFifthGameOfTheCurrentSet && isTheCurrentPointsFourty) {
+        if (
+            currentGamesOfCurrentSet == 5 &&
+            opponentGamesOfCurrentSet < 5 &&
+            teamScoredCurrentPoints == FORTY_POINTS
+        ) {
             hasBeenWonASetGame = true
         }
         
