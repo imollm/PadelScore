@@ -310,7 +310,7 @@ class PadelScore_Watch_AppTests: XCTestCase {
         XCTAssertEqual(match.getCurrentSet(), 1)
     }
     
-    func test3SetsWinnedByTieBreaks() {
+    func testTeamAWinsTheMatchWith2TieBreaks() {
         //-----------------//
         // START FIRST SET //
         //-----------------//
