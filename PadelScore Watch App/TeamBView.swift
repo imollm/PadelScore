@@ -13,13 +13,17 @@ struct TeamBView: View {
     @Binding var currentPointsTeamB: String
     @Binding var currentTieBreakPointsTeamA: String
     @Binding var currentTieBreakPointsTeamB: String
+    @Binding var isTieBreak: Bool
+    @Binding var hasFinished: Bool
     
     var body: some View {
         VStack {
-            HStack {
-                ForEach(matchModel.match.teamB.getSets()) { item in
-                    Text(String(item.getGames()))
-                        .padding(.horizontal)
+            if (!self.isTieBreak) {
+                HStack {
+                    ForEach(matchModel.match.teamB.getSets()) { item in
+                        Text(String(item.getGames()))
+                            .padding(.horizontal)
+                    }
                 }
             }
             HStack {
@@ -36,6 +40,9 @@ struct TeamBView: View {
                         self.currentPointsTeamB =
                             self.matchModel.match.teamB.getCurrentPoints()
                     }
+                    
+                    self.isTieBreak = self.matchModel.match.isTieBreak
+                    self.hasFinished = self.matchModel.match.hasFinished
                 }, label: {
                     Image(systemName: "plus")
                 })
@@ -55,6 +62,9 @@ struct TeamBView: View {
                         self.currentPointsTeamB =
                             self.matchModel.match.teamB.getCurrentPoints()
                     }
+                    
+                    self.isTieBreak = self.matchModel.match.isTieBreak
+                    self.hasFinished = self.matchModel.match.hasFinished
                 }, label: {
                     Image(systemName: "minus")
                 })
@@ -72,12 +82,16 @@ struct TeamBView_Previews: PreviewProvider {
         let currentPointsTeamB = Binding<String>(get: { "0" }, set: { _ in })
         let currentTieBreakPointsTeamA = Binding<String>(get: { "0" }, set: { _ in })
         let currentTieBreakPointsTeamB = Binding<String>(get: { "0" }, set: { _ in })
+        let isTieBreak = Binding<Bool>(get: { false }, set: { _ in })
+        let hasFinished = Binding<Bool>(get: { false }, set: { _ in })
         
         TeamBView(
             currentPointsTeamA: currentPointsTeamA,
             currentPointsTeamB: currentPointsTeamB,
             currentTieBreakPointsTeamA: currentTieBreakPointsTeamA,
-            currentTieBreakPointsTeamB: currentTieBreakPointsTeamB)
+            currentTieBreakPointsTeamB: currentTieBreakPointsTeamB,
+            isTieBreak: isTieBreak,
+            hasFinished: hasFinished)
             .environmentObject(MatchModel())
     }
 }

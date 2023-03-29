@@ -13,24 +13,36 @@ struct ScoreView: View {
     @State var currentPointsTeamB: String = "0"
     @State var currentTieBreakPointsTeamA: String = "0"
     @State var currentTieBreakPointsTeamB: String = "0"
+    @State var isTieBreak: Bool = false
+    @State var hasFinished: Bool = false
     
     var body: some View {
-        VStack {
-            TeamAView(
-                currentPointsTeamA: $currentPointsTeamA,
-                currentPointsTeamB: $currentPointsTeamB,
-                currentTieBreakPointsTeamA: $currentTieBreakPointsTeamA,
-                currentTieBreakPointsTeamB: $currentTieBreakPointsTeamB
-            )
-            Divider()
-              .frame(height: 2)
-              .padding(.horizontal, 10)
-            TeamBView(
-                currentPointsTeamA: $currentPointsTeamA,
-                currentPointsTeamB: $currentPointsTeamB,
-                currentTieBreakPointsTeamA: $currentTieBreakPointsTeamA,
-                currentTieBreakPointsTeamB: $currentTieBreakPointsTeamB
-            )
+        if (self.hasFinished) {
+            FinalResultView()
+        } else {
+            VStack {
+                TeamAView(
+                    currentPointsTeamA: $currentPointsTeamA,
+                    currentPointsTeamB: $currentPointsTeamB,
+                    currentTieBreakPointsTeamA: $currentTieBreakPointsTeamA,
+                    currentTieBreakPointsTeamB: $currentTieBreakPointsTeamB,
+                    isTieBreak: $isTieBreak,
+                    hasFinished: $hasFinished
+                )
+                if (isTieBreak) {
+                    Text("TIE BREAK")
+                } else {
+                    Divider().frame(height: 2).padding(.horizontal, 10)
+                }
+                TeamBView(
+                    currentPointsTeamA: $currentPointsTeamA,
+                    currentPointsTeamB: $currentPointsTeamB,
+                    currentTieBreakPointsTeamA: $currentTieBreakPointsTeamA,
+                    currentTieBreakPointsTeamB: $currentTieBreakPointsTeamB,
+                    isTieBreak: $isTieBreak,
+                    hasFinished: $hasFinished
+                )
+            }
         }
     }
 }
@@ -40,6 +52,8 @@ struct ContentView_Previews: PreviewProvider {
     @State var currentPointsTeamB: String = "0"
     @State var currentTieBreakPointsTeamA: String = "0"
     @State var currentTieBreakPointsTeamB: String = "0"
+    @State var isTieBreak: Bool = false
+    @State var hasFinished: Bool = false
     
     static var previews: some View {
         ScoreView()
