@@ -206,7 +206,7 @@ public class Match: MatchProtocol {
             self.teamA.points.resetPoints()
             self.teamB.points.resetPoints()
             teamThatHasScored.addSetGame(setIndex: self.getCurrentSet())
-            self.currentSet += 1
+            self.nextSet()
         } else if (self.hasCurrentGameBeenWonByScoredTeam(teamThatHasScored: teamThatHasScored)) {
             self.teamA.points.resetPoints()
             self.teamB.points.resetPoints()
@@ -237,13 +237,13 @@ public class Match: MatchProtocol {
                     teamThatHasScored.addSetGame(setIndex: self.getCurrentSet())
                     teamThatHasScored.tieBreakPoints.resetPoints()
                     self.getOpponent(team: teamThatHasScored).tieBreakPoints.resetPoints()
-                    self.currentSet += 1
+                    self.nextSet()
                 } else {
                     teamThatHasScored.getSet(setIndex: self.getCurrentSet()).addSetGame()
                     teamThatHasScored.tieBreakPoints.resetPoints()
                     self.getOpponent(team: teamThatHasScored).tieBreakPoints.resetPoints()
                     self.isTieBreak = false
-                    self.currentSet += 1
+                    self.nextSet()
                 }
             } else {
                 teamThatHasScored.addTieBreakPoint()
