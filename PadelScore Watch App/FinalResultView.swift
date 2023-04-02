@@ -12,19 +12,23 @@ struct FinalResultView: View {
     
     var body: some View {
         VStack {
-            Text((self.matchModel.match.winner?.getName() ?? "") + " ha ganado")
+            Text((self.matchModel.match.winner?.getName() ?? "") + " has won").padding(.vertical)
             
             VStack {
-                ForEach(self.matchModel.match.teamA.getSets()) { item in
-                    Text(String(item.getGames()))
-                        .padding(.horizontal)
+                HStack {
+                    ForEach(self.matchModel.match.teamA.getSets()) { item in
+                        Text(String(item.getGames()))
+                            .padding(.horizontal)
+                    }
                 }
                 
                 Divider().frame(height: 2).padding(.horizontal, 10)
                 
-                ForEach(self.matchModel.match.teamB.getSets()) { item in
-                    Text(String(item.getGames()))
-                        .padding(.horizontal)
+                HStack {
+                    ForEach(self.matchModel.match.teamB.getSets()) { item in
+                        Text(String(item.getGames()))
+                            .padding(.horizontal)
+                    }
                 }
             }
         }
