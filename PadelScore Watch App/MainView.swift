@@ -8,19 +8,31 @@
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject var matchModel:MatchModel
+    @EnvironmentObject var matchModel: MatchModel
+    @State var hasStarted: Bool = false
     @State var isTieBreak: Bool = false
     @State var hasFinished: Bool = false
+    @State var isGoldenPoint: Bool = false
+    @State var isSuperTieBreak: Bool = false
     
     var body: some View {
-        if (self.hasFinished) {
-            FinalResultView(
-                hasFinished: $hasFinished
-            )
+        if (self.hasStarted) {
+            if (self.hasFinished) {
+                FinalResultView(
+                    hasFinished: $hasFinished,
+                    hasStarted: $hasStarted
+                )
+            } else {
+                ScoreView(
+                    isTieBreak: $isTieBreak,
+                    hasFinished: $hasFinished
+                )
+            }
         } else {
-            ScoreView(
-                isTieBreak: $isTieBreak,
-                hasFinished: $hasFinished
+            ConfigView(
+                isGoldenPoint: $isGoldenPoint,
+                isSuperTieBreak: $isSuperTieBreak,
+                hasStarted: $hasStarted
             )
         }
     }

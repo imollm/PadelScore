@@ -172,6 +172,8 @@ public class Match: MatchProtocol {
     var hasFinished: Bool
     var isTieBreak: Bool
     var winner: Team?
+    var isGoldenPoint: Bool
+    var isSuperTieBreak: Bool
     
     required init() {
         self.teamA = Team(name: TEAM_A)
@@ -180,6 +182,8 @@ public class Match: MatchProtocol {
         self.hasFinished = false
         self.isTieBreak = false
         self.winner = nil
+        self.isGoldenPoint = false
+        self.isSuperTieBreak = false
     }
     
     func getCurrentSet() -> Int {

@@ -10,6 +10,7 @@ import SwiftUI
 struct FinalResultView: View {
     @EnvironmentObject var matchModel:MatchModel
     @Binding var hasFinished: Bool
+    @Binding var hasStarted: Bool
     
     var body: some View {
         VStack {
@@ -32,6 +33,7 @@ struct FinalResultView: View {
             }
             Button("Reset match") {
                 self.hasFinished = false
+                self.hasStarted = false
                 self.matchModel.match.resetMatch()
             }.padding(.top)
         }
@@ -41,9 +43,11 @@ struct FinalResultView: View {
 struct FinalResultView_Previews: PreviewProvider {
     static var previews: some View {
         let hasFinished = Binding<Bool>(get: { false }, set: { _ in })
+        let hasStarted = Binding<Bool>(get: { false }, set: { _ in })
         
         FinalResultView(
-            hasFinished: hasFinished
+            hasFinished: hasFinished,
+            hasStarted: hasStarted
         ).environmentObject(MatchModel())
     }
 }

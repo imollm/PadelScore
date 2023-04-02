@@ -62,6 +62,8 @@ protocol MatchProtocol {
     var hasFinished: Bool { get }
     var isTieBreak: Bool { get }
     var winner: Team? { get }
+    var isGoldenPoint: Bool { get }
+    var isSuperTieBreak: Bool { get }
     
     init()
     
