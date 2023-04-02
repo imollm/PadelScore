@@ -13,7 +13,7 @@ struct PadelScore_Watch_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ScoreView()
+            MainView()
                 .environmentObject(matchModel)
         }
     }

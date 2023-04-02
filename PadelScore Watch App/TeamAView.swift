@@ -92,7 +92,7 @@ struct TeamAView_Previews: PreviewProvider {
             currentTieBreakPointsTeamA: currentTieBreakPointsTeamA,
             currentTieBreakPointsTeamB: currentTieBreakPointsTeamB,
             isTieBreak: isTieBreak,
-            hasFinished: hasFinished)
-            .environmentObject(MatchModel())
+            hasFinished: hasFinished
+        ).environmentObject(MatchModel())
     }
 }

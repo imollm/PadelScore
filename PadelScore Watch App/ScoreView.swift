@@ -13,50 +13,44 @@ struct ScoreView: View {
     @State var currentPointsTeamB: String = "0"
     @State var currentTieBreakPointsTeamA: String = "0"
     @State var currentTieBreakPointsTeamB: String = "0"
-    @State var isTieBreak: Bool = false
-    @State var hasFinished: Bool = false
+    @Binding var isTieBreak: Bool
+    @Binding var hasFinished: Bool
     
     var body: some View {
-        if (self.hasFinished) {
-            FinalResultView()
-        } else {
-            VStack {
-                TeamAView(
-                    currentPointsTeamA: $currentPointsTeamA,
-                    currentPointsTeamB: $currentPointsTeamB,
-                    currentTieBreakPointsTeamA: $currentTieBreakPointsTeamA,
-                    currentTieBreakPointsTeamB: $currentTieBreakPointsTeamB,
-                    isTieBreak: $isTieBreak,
-                    hasFinished: $hasFinished
-                )
-                if (isTieBreak) {
-                    Text("TIE BREAK")
-                } else {
-                    Divider().frame(height: 2).padding(.horizontal, 10)
-                }
-                TeamBView(
-                    currentPointsTeamA: $currentPointsTeamA,
-                    currentPointsTeamB: $currentPointsTeamB,
-                    currentTieBreakPointsTeamA: $currentTieBreakPointsTeamA,
-                    currentTieBreakPointsTeamB: $currentTieBreakPointsTeamB,
-                    isTieBreak: $isTieBreak,
-                    hasFinished: $hasFinished
-                )
+        VStack {
+            TeamAView(
+                currentPointsTeamA: $currentPointsTeamA,
+                currentPointsTeamB: $currentPointsTeamB,
+                currentTieBreakPointsTeamA: $currentTieBreakPointsTeamA,
+                currentTieBreakPointsTeamB: $currentTieBreakPointsTeamB,
+                isTieBreak: $isTieBreak,
+                hasFinished: $hasFinished
+            )
+            if (isTieBreak) {
+                Text("TIE BREAK")
+            } else {
+                Divider().frame(height: 2).padding(.horizontal, 10)
             }
+            TeamBView(
+                currentPointsTeamA: $currentPointsTeamA,
+                currentPointsTeamB: $currentPointsTeamB,
+                currentTieBreakPointsTeamA: $currentTieBreakPointsTeamA,
+                currentTieBreakPointsTeamB: $currentTieBreakPointsTeamB,
+                isTieBreak: $isTieBreak,
+                hasFinished: $hasFinished
+            )
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    @State var currentPointsTeamA: String = "0"
-    @State var currentPointsTeamB: String = "0"
-    @State var currentTieBreakPointsTeamA: String = "0"
-    @State var currentTieBreakPointsTeamB: String = "0"
-    @State var isTieBreak: Bool = false
-    @State var hasFinished: Bool = false
-    
+struct ScoreView_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreView()
-            .environmentObject(MatchModel())
+        let isTieBreak = Binding<Bool>(get: { false }, set: { _ in })
+        let hasFinished = Binding<Bool>(get: { false }, set: { _ in })
+
+        ScoreView(
+            isTieBreak: isTieBreak,
+            hasFinished: hasFinished
+        ).environmentObject(MatchModel())
     }
 }

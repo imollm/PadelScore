@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A1636BC29D9D108003F4DF5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1636BB29D9D108003F4DF5 /* MainView.swift */; };
 		6A1E145F29D04A2F00115692 /* FinalResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1E145E29D04A2F00115692 /* FinalResultView.swift */; };
 		6A3B350D29CB5BE20093D62B /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3B350C29CB5BE20093D62B /* Protocol.swift */; };
 		6AE7AF0829C31142007C9986 /* PadelScore Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6AE7AF0729C31142007C9986 /* PadelScore Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -61,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6A1636BB29D9D108003F4DF5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6A1E145E29D04A2F00115692 /* FinalResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalResultView.swift; sourceTree = "<group>"; };
 		6A3B350C29CB5BE20093D62B /* Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		6AE7AF0129C31142007C9986 /* PadelScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PadelScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +133,7 @@
 				6AE7AF0C29C31142007C9986 /* PadelScoreApp.swift */,
 				6A3B350C29CB5BE20093D62B /* Protocol.swift */,
 				6AE7AF0E29C31142007C9986 /* ScoreView.swift */,
+				6A1636BB29D9D108003F4DF5 /* MainView.swift */,
 				6AE7AF3C29C336FF007C9986 /* TeamAView.swift */,
 				6AE7AF3E29C33714007C9986 /* TeamBView.swift */,
 				6A1E145E29D04A2F00115692 /* FinalResultView.swift */,
@@ -325,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AE7AF3B29C32261007C9986 /* Model.swift in Sources */,
+				6A1636BC29D9D108003F4DF5 /* MainView.swift in Sources */,
 				6AE7AF3D29C336FF007C9986 /* TeamAView.swift in Sources */,
 				6AE7AF0F29C31142007C9986 /* ScoreView.swift in Sources */,
 				6AE7AF3F29C33714007C9986 /* TeamBView.swift in Sources */,
