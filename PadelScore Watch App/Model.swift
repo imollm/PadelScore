@@ -154,6 +154,15 @@ internal class Team: TeamProtocol {
     func getSetsWon() -> Int {
         return self.numSetsWon
     }
+    
+    func reset() -> Void {
+        for i in 0..<self.getSets().count {
+            self.getSet(setIndex: i).games = 0
+        }
+        self.points.points = 0
+        self.tieBreakPoints.points = 0
+        self.numSetsWon = 0
+    }
 }
 
 public class Match: MatchProtocol {
@@ -354,6 +363,15 @@ public class Match: MatchProtocol {
         } else {
             return self.teamA
         }
+    }
+    
+    func resetMatch() -> Void {
+        self.teamA.reset()
+        self.teamB.reset()
+        self.currentSet = 0
+        self.hasFinished = false
+        self.isTieBreak = false
+        self.winner = nil
     }
 }
 

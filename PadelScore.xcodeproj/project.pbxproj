@@ -130,10 +130,10 @@
 		6AE7AF0B29C31142007C9986 /* PadelScore Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				6AE7AF0C29C31142007C9986 /* PadelScoreApp.swift */,
 				6A3B350C29CB5BE20093D62B /* Protocol.swift */,
-				6AE7AF0E29C31142007C9986 /* ScoreView.swift */,
+				6AE7AF0C29C31142007C9986 /* PadelScoreApp.swift */,
 				6A1636BB29D9D108003F4DF5 /* MainView.swift */,
+				6AE7AF0E29C31142007C9986 /* ScoreView.swift */,
 				6AE7AF3C29C336FF007C9986 /* TeamAView.swift */,
 				6AE7AF3E29C33714007C9986 /* TeamBView.swift */,
 				6A1E145E29D04A2F00115692 /* FinalResultView.swift */,

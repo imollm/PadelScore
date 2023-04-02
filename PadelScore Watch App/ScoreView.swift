@@ -26,7 +26,7 @@ struct ScoreView: View {
                 isTieBreak: $isTieBreak,
                 hasFinished: $hasFinished
             )
-            if (isTieBreak) {
+            if (self.isTieBreak) {
                 Text("TIE BREAK")
             } else {
                 Divider().frame(height: 2).padding(.horizontal, 10)
@@ -39,6 +39,13 @@ struct ScoreView: View {
                 isTieBreak: $isTieBreak,
                 hasFinished: $hasFinished
             )
+        }.onChange(of: hasFinished) { value in
+            if value == false {
+                self.currentPointsTeamA = "0"
+                self.currentPointsTeamB = "0"
+                self.currentTieBreakPointsTeamA = "0"
+                self.currentTieBreakPointsTeamB = "0"
+            }
         }
     }
 }

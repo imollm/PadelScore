@@ -14,7 +14,9 @@ struct MainView: View {
     
     var body: some View {
         if (self.hasFinished) {
-            FinalResultView()
+            FinalResultView(
+                hasFinished: $hasFinished
+            )
         } else {
             ScoreView(
                 isTieBreak: $isTieBreak,

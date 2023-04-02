@@ -51,6 +51,7 @@ protocol TeamProtocol {
     func substractTieBreakPoint() -> Void
     func addSetWon() -> Void
     func getSetsWon() -> Int
+    func reset() -> Void
 }
 
 
@@ -78,4 +79,5 @@ protocol MatchProtocol {
     func hasCurrentSetBeenWonByScoredTeam(teamThatHasScored: Team) -> Bool
     func hasCurrentGameBeenWonByScoredTeam(teamThatHasScored: Team) -> Bool
     func getOpponent(team: Team) -> Team
+    func resetMatch() -> Void
 }
