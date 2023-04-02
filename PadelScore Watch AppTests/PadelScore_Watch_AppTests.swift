@@ -111,17 +111,35 @@ class PadelScore_Watch_AppTests: XCTestCase {
     }
 
     func testTeamWonSecondSetAndTheMatch() {
-        // Win first set 6 - 0
-        for _ in 1...6 {
-            teamA.addSetGame(setIndex: 0)
+        // Set first set of team A to 5 games
+        for _ in 1...5 {
+            teamA.addSetGame(setIndex: match.getCurrentSet())
         }
-        XCTAssertEqual(teamA.getSet(setIndex: match.getCurrentSet()).getGames(), 6)
+        XCTAssertEqual(teamA.getSet(setIndex: match.getCurrentSet()).getGames(), 5)
+        XCTAssertEqual(teamB.getSet(setIndex: match.getCurrentSet()).getGames(), 0)
+        
+        // Set points to 40
+        for i in 1...3 {
+            if (i <= 3) {
+                let _ = teamA.addPoint() // 40 points
+            }
+        }
+        XCTAssertEqual(teamA.getCurrentPoints(), "40")
+        
+        // Win the set
+        match.addPoint(team: TEAM_A)
+        
+        XCTAssertEqual(match.getCurrentSet(), 1)
+        XCTAssertEqual(teamA.getSet(setIndex: match.getCurrentSet() - 1).getGames(), 6)
+        XCTAssertEqual(teamB.getSet(setIndex: match.getCurrentSet() - 1).getGames(), 0)
+        XCTAssertFalse(match.hasFinished)
+        XCTAssertNil(match.winner?.getName(), teamA.getName())
+        XCTAssertEqual(teamA.getSetsWon(), 1)
+        XCTAssertEqual(teamB.getSetsWon(), 0)
         
         // Set second set of team A to 5 games
-        match.currentSet = 1
-        XCTAssertEqual(match.getCurrentSet(), 1)
         for _ in 1...5 {
-            teamA.addSetGame(setIndex: 1)
+            teamA.addSetGame(setIndex: match.getCurrentSet())
         }
         XCTAssertEqual(teamA.getSet(setIndex: match.getCurrentSet()).getGames(), 5)
         
@@ -133,17 +151,19 @@ class PadelScore_Watch_AppTests: XCTestCase {
         }
         XCTAssertEqual(teamA.getCurrentPoints(), "40")
 
+        // Win second set and the match
         match.addPoint(team: TEAM_A)
         
         XCTAssertEqual(teamA.getSet(setIndex: match.getCurrentSet() - 1).getGames(), 6)
-        XCTAssertEqual(teamA.getSet(setIndex: match.getCurrentSet()).getGames(), 6)
         XCTAssertEqual(teamB.getSet(setIndex: match.getCurrentSet() - 1).getGames(), 0)
+        
+        XCTAssertEqual(teamA.getSet(setIndex: match.getCurrentSet()).getGames(), 6)
         XCTAssertEqual(teamB.getSet(setIndex: match.getCurrentSet()).getGames(), 0)
         
-        XCTAssertEqual(match.hasFinished, true)
+        XCTAssertTrue(match.hasFinished)
         XCTAssertEqual(match.winner?.getName(), teamA.getName())
-        XCTAssertEqual(teamA.getWinningSetsCount(), 2)
-        XCTAssertEqual(teamB.getWinningSetsCount(), 0)
+        XCTAssertEqual(teamA.getSetsWon(), 2)
+        XCTAssertEqual(teamB.getSetsWon(), 0)
     }
     
     func testTeamWonSetGameAndMatchActiveModeTieBreak() {
@@ -422,7 +442,6 @@ class PadelScore_Watch_AppTests: XCTestCase {
         XCTAssertFalse(match.isTieBreak)
         XCTAssertEqual(teamA.getSet(setIndex: match.getCurrentSet() - 1).getGames(), 7)
         XCTAssertEqual(teamB.getSet(setIndex: match.getCurrentSet() - 1).getGames(), 6)
-        XCTAssertEqual(match.getCurrentSet(), 2)
         XCTAssertTrue(match.hasFinished)
         XCTAssertEqual(match.winner?.getName(), teamA.getName())
     }

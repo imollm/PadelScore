@@ -93,12 +93,14 @@ internal class Team: TeamProtocol {
     var sets: [Set]
     var points: Point
     var tieBreakPoints: Point
+    var numSetsWon: Int
     
     required init(name: String) {
         self.name = name
         self.sets = [Set(), Set(), Set()]
         self.points = Point()
         self.tieBreakPoints = Point()
+        self.numSetsWon = 0
     }
     
     func getSets() -> [Set] {
@@ -145,9 +147,12 @@ internal class Team: TeamProtocol {
         return self.tieBreakPoints.substractPoint()
     }
     
-    func getWinningSetsCount() -> Int {
-        let count = self.sets.filter { item in item.getGames() >= 6 }.count
-        return count
+    func addSetWon() -> Void {
+        self.numSetsWon += 1
+    }
+    
+    func getSetsWon() -> Int {
+        return self.numSetsWon
     }
 }
 
@@ -197,6 +202,7 @@ public class Match: MatchProtocol {
             self.teamA.points.resetPoints()
             self.teamB.points.resetPoints()
             teamThatHasScored.addSetGame(setIndex: self.getCurrentSet())
+            teamThatHasScored.addSetWon()
         } else if (self.hasTieBreak(teamThatHasScored: teamThatHasScored) && !self.isTieBreak) {
             self.isTieBreak = true
             self.teamA.points.resetPoints()
@@ -206,6 +212,7 @@ public class Match: MatchProtocol {
             self.teamA.points.resetPoints()
             self.teamB.points.resetPoints()
             teamThatHasScored.addSetGame(setIndex: self.getCurrentSet())
+            teamThatHasScored.addSetWon()
             self.nextSet()
         } else if (self.hasCurrentGameBeenWonByScoredTeam(teamThatHasScored: teamThatHasScored)) {
             self.teamA.points.resetPoints()
@@ -230,6 +237,8 @@ public class Match: MatchProtocol {
                 (teamThatHasScoredTieBreakPoints == 6 && opponentTieBreakPoints < 6) ||
                 (teamThatHasScoredTieBreakPoints >= 6 && opponentTieBreakPoints >= 6 && is2PointDifference)
             ) {
+                teamThatHasScored.addSetWon()
+
                 if (self.hasScoredTeamWonTheMatch(teamThatHasScored: teamThatHasScored)) {
                     self.hasFinished = true
                     self.winner = teamThatHasScored
@@ -237,7 +246,6 @@ public class Match: MatchProtocol {
                     teamThatHasScored.addSetGame(setIndex: self.getCurrentSet())
                     teamThatHasScored.tieBreakPoints.resetPoints()
                     self.getOpponent(team: teamThatHasScored).tieBreakPoints.resetPoints()
-                    self.nextSet()
                 } else {
                     teamThatHasScored.getSet(setIndex: self.getCurrentSet()).addSetGame()
                     teamThatHasScored.tieBreakPoints.resetPoints()
@@ -266,22 +274,25 @@ public class Match: MatchProtocol {
     }
     
     func hasScoredTeamWonTheMatch(teamThatHasScored: Team) -> Bool {
-        let opponent = self.getOpponent(team: teamThatHasScored)
         var hasWonTheMatch = false
+        let opponent = self.getOpponent(team: teamThatHasScored)
+        let teamThatHasScoredSetsWon = teamThatHasScored.getSetsWon()
+        let opponentSetsWon = opponent.getSetsWon()
         
         if (self.isTieBreak) {
             if (
-                teamThatHasScored.getWinningSetsCount() == 1 &&
-                opponent.getWinningSetsCount() < 2
+                teamThatHasScoredSetsWon == 2 &&
+                opponentSetsWon < 2
             ) {
                 hasWonTheMatch = true
             }
         } else {
             if (
-                teamThatHasScored.getWinningSetsCount() == 1 &&
+                teamThatHasScored.getSetsWon() == 1 &&
                 teamThatHasScored.getSets()[self.getCurrentSet()].getGames() == 5 &&
                 teamThatHasScored.getCurrentPoints() == FORTY_POINTS &&
-                opponent.getWinningSetsCount() < 2
+                opponent.getSet(setIndex: self.getCurrentSet()).getGames() < 6 &&
+                opponent.getSetsWon() < 2
             ) {
                 hasWonTheMatch = true
             }

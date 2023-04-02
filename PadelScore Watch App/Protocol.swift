@@ -34,6 +34,7 @@ protocol TeamProtocol {
     var sets: [Set] { get set }
     var points: Point { get set }
     var tieBreakPoints: Point { get set }
+    var numSetsWon: Int { get set }
     
     init(name: String)
     
@@ -48,7 +49,8 @@ protocol TeamProtocol {
     func addTieBreakPoint() -> Void
     func substractPoint() -> Void
     func substractTieBreakPoint() -> Void
-    func getWinningSetsCount() -> Int
+    func addSetWon() -> Void
+    func getSetsWon() -> Int
 }
 
 
