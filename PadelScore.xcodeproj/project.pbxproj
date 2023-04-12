@@ -108,6 +108,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A41DA9829E6F97D0047DC64 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6A1636BB29D9D108003F4DF5 /* MainView.swift */,
+				6AD89BDA29DA251F00099B6D /* ConfigView.swift */,
+				6AE7AF0E29C31142007C9986 /* ScoreView.swift */,
+				6AE7AF3C29C336FF007C9986 /* TeamAView.swift */,
+				6AE7AF3E29C33714007C9986 /* TeamBView.swift */,
+				6A1E145E29D04A2F00115692 /* FinalResultView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		6AE7AEFA29C31141007C9986 = {
 			isa = PBXGroup;
 			children = (
@@ -134,13 +147,8 @@
 			children = (
 				6A3B350C29CB5BE20093D62B /* Protocol.swift */,
 				6AE7AF0C29C31142007C9986 /* PadelScoreApp.swift */,
-				6A1636BB29D9D108003F4DF5 /* MainView.swift */,
-				6AD89BDA29DA251F00099B6D /* ConfigView.swift */,
-				6AE7AF0E29C31142007C9986 /* ScoreView.swift */,
-				6AE7AF3C29C336FF007C9986 /* TeamAView.swift */,
-				6AE7AF3E29C33714007C9986 /* TeamBView.swift */,
-				6A1E145E29D04A2F00115692 /* FinalResultView.swift */,
 				6AE7AF3A29C32261007C9986 /* Model.swift */,
+				6A41DA9829E6F97D0047DC64 /* Views */,
 				6AE7AF1029C31145007C9986 /* Assets.xcassets */,
 				6AE7AF1229C31145007C9986 /* Preview Content */,
 			);
